@@ -39,10 +39,16 @@ def load_dolar(file_path):
             posibles = [df.columns[1]]
             
         df = df.rename(columns={posibles[0]: 'PRECIO'})
+        #df['PRECIO'] = pd.to_numeric(df['PRECIO'], errors='coerce')
+        #df = df.dropna(subset=['FECHA', 'PRECIO']).sort_values('FECHA')        
+        #df = df.set_index('FECHA').resample('D').ffill().reset_index()
         df['PRECIO'] = pd.to_numeric(df['PRECIO'], errors='coerce')
-        df = df.dropna(subset=['FECHA', 'PRECIO']).sort_values('FECHA')
+        df = df.dropna(subset=['FECHA', 'PRECIO']).sort_values('FECHA')    
+        
+        df = df.drop_duplicates(subset=['FECHA'], keep='last')
         
         df = df.set_index('FECHA').resample('D').ffill().reset_index()
+
         return df
     except Exception as e:
         st.error(f"Error cargando Dolar: {e}")
