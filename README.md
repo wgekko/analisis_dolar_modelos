@@ -60,5 +60,5 @@ pip install -r requirements.txt
 streamlit run main.py
 
 
-git clone [https://github.com/wgekko/tu_repositorio.git](https://github.com/tu_usuario/tu_repositorio.git)
+git clone (https://github.com/wgekko/analisis_dolar_modelos.git)
 cd tu_repositorio
