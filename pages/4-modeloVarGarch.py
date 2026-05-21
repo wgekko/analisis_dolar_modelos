@@ -44,9 +44,17 @@ def load_dolar(file_source):
     if not posibles:
         raise ValueError("No se encontró columna de precio en Dolar.xlsx")
     
+    #df = df.rename(columns={posibles[0]: 'PRECIO'})
+    #df['PRECIO'] = pd.to_numeric(df['PRECIO'], errors='coerce')
+    #df = df.dropna(subset=['FECHA', 'PRECIO']).sort_values('FECHA')
+
     df = df.rename(columns={posibles[0]: 'PRECIO'})
     df['PRECIO'] = pd.to_numeric(df['PRECIO'], errors='coerce')
     df = df.dropna(subset=['FECHA', 'PRECIO']).sort_values('FECHA')
+    
+    # --- SOLUCIÓN: Limpiar fechas duplicadas antes de devolver el DataFrame ---
+    df = df.drop_duplicates(subset=['FECHA'], keep='last')
+
     return df
 
 @st.cache_data

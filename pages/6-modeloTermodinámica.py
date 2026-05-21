@@ -40,8 +40,13 @@ def cargar_y_adaptar_excel(ruta, dias):
         df = df[columnas_interes]
         
         # Conversión y ordenamiento temporal
-        df['FECHA'] = pd.to_datetime(df['FECHA'])
+        # df['FECHA'] = pd.to_datetime(df['FECHA'])
+        # df = df.sort_values('FECHA').set_index('FECHA') 
+        df['FECHA'] = pd.to_datetime(df['FECHA'])        
+        # --- SOLUCIÓN: Limpiar fechas duplicadas antes de setear el índice ---
+        df = df.drop_duplicates(subset=['FECHA'], keep='last')        
         df = df.sort_values('FECHA').set_index('FECHA')
+
         
         # Asegurar tipos flotantes para evitar fricciones en el cálculo numérico
         for col in ['COMPRA', 'VENTA', 'PROMEDIO', 'BRECHA']:
