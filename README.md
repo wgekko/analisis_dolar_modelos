@@ -62,3 +62,13 @@ streamlit run main.py
 
 git clone (https://github.com/wgekko/analisis_dolar_modelos.git)
 cd tu_repositorio
+
+
+video demo 
+
+
+
+
+
+
+
